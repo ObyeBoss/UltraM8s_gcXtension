@@ -1,0 +1,3 @@
+allow cameraserver migt_file dir { search }
+allow hal_camera_default system_file { read open getattr map }
+allow same_process_hal_file { read open getattr map }
