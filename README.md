@@ -22,7 +22,7 @@ contact me, I'm eager to keep up digging pixel blobs.
 
 ## Requirements
 * I'd bet permissive selinux is needed
-* Your rom should likely have CONFIG_ION_SYSTEM_HEAP enabked & something [like ion camera heap](https://github.com/UtsavBalar1231/kernel_xiaomi_sm8250/commit/d0d97148af7769b23136807f7fd386026908d209), but since I'm not rom dev, so not sure about this.
+* Your rom should likely have CONFIG_ION_SYSTEM_HEAP enabled & something [like ion camera heap](https://github.com/UtsavBalar1231/kernel_xiaomi_sm8250/commit/d0d97148af7769b23136807f7fd386026908d209), but since I'm not rom dev, so not sure about this.
 
 ## Support
 * UltraCVM [Chat](https://t.me/ucvm_gcam)
