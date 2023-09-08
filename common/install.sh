@@ -1,15 +1,21 @@
 L=$MODPATH/common/blob
-cp_ch /system/vendor/etc/public.libraries.txt $MODPATH/system/vendor/etc/public.libraries.txt
-PL="/system/vendor/etc/public.libraries.txt"
+#PL="/system/vendor/etc/public.libraries.txt"
+PL="$(find $PARTITIONS -type f -name "public.libraries.txt")"
 V=/system/vendor/lib64
 SV=/system/lib64
+
+for OPL in ${PL}; do
+PL="$MODPATH$(echo $OPL | sed "s|^/vendor|/system/vendor|g")"
+$KSU && PL="$(echo $PL | sed -e "s|^/odm|/system/odm|g" -e "s|^/my_product|/system/my_product|g")"
+cp_ch $ORIGDIR$OPL $PL
+sed -i 's/\t/  /g' $PL
 if [ -f "$V/lib_aion_buffer.so" ]; then
  cp_ch $L/lib_aion_buffer.so $MODPATH$V/lib_aion_buffer.so
- echo "lib_aion_buffer.so" >> $MODPATH/$PL
+ echo "lib_aion_buffer.so" >> $PL
 fi 
 if [ -f "$V/libOpenCL-pixel.so" ]; then
  cp_ch $L/libOpenCL-pixel.so $MODPATH$V/libOpenCL-pixel.so
- echo "libOpenCL-pixel.so" >> $MODPATH/$PL
+ echo "libOpenCL-pixel.so" >> $PL
 fi
 if [ -f "$SV/libdmabufheap.so" ]; then
  if [ $API -ge 33 ]; then
@@ -17,19 +23,20 @@ if [ -f "$SV/libdmabufheap.so" ]; then
  else
  cp_ch $L/libdmabufheap.so $MODPATH$SV/libdmabufheap.so
  fi
- echo "libdmabufheap.so" >> $MODPATH/$PL
+ echo "libdmabufheap.so" >> $PL
 fi
 cp_ch $L/libucvm_egl_shm.so $MODPATH$SV/libucvm_egl_shm.so
-echo "libucvm_egl_shm.so" >> $MODPATH/$PL
-echo "libucvm_blob_meadapt.so" >> $MODPATH/$PL
-echo "libucvm_blob_mwrp.so" >> $MODPATH/$PL
-echo "libucvm_blob_nntstgchecker.so" >> $MODPATH/$PL
-echo "libucvm_blob_procr.so" >> $MODPATH/$PL
-echo "libucvm_blobfis_prot.so" >> $MODPATH/$PL
-echo "libucvm_blobfli.so" >> $MODPATH/$PL
-echo "libucvm_blobscncheckr.so" >> $MODPATH/$PL
-echo "libucvm_fis.so" >> $MODPATH/$PL
-echo "libucvm_protosh_mblb.so" >> $MODPATH/$PL
-echo "libucvm_qtpaf_blob.so" >> $MODPATH/$PL
-echo "libucvm_shmblob.so" >> $MODPATH/$PL
-echo "libucvm_ttqcblob.so" >> $MODPATH/$PL
+echo "libucvm_egl_shm.so" >> $PL
+echo "libucvm_blob_meadapt.so" >> $PL
+echo "libucvm_blob_mwrp.so" >> $PL
+echo "libucvm_blob_nntstgchecker.so" >> $PL
+echo "libucvm_blob_procr.so" >> $PL
+echo "libucvm_blobfis_prot.so" >> $PL
+echo "libucvm_blobfli.so" >> $PL
+echo "libucvm_blobscncheckr.so" >> $PL
+echo "libucvm_fis.so" >> $PL
+echo "libucvm_protosh_mblb.so" >> $PL
+echo "libucvm_qtpaf_blob.so" >> $PL
+echo "libucvm_shmblob.so" >> $PL
+echo "libucvm_ttqcblob.so" >> $PL
+done

@@ -15,6 +15,7 @@ MINAPI=31
 #MAXAPI=25
 #DYNLIB=true
 #DEBUG=true
+PARTITIONS="/system /system_ext /vendor /odm /my_product /mi_ext"
 
 ##########################################################################################
 # Replace list
@@ -42,7 +43,6 @@ REPLACE="
 
 set_permissions() {
   chcon -R u:object_r:same_process_hal_file:s0 $MODPATH/system/vendor/lib64/lib_aion_buffer.so
-  chcon -R u:object_r:same_process_hal_file:s0 /vendor/lib64/lib_aion_buffer.so
   : # Remove this if adding to this function
 
   # Note that all files/folders in magisk module directory have the $MODPATH prefix - keep this prefix on all of your files/folders

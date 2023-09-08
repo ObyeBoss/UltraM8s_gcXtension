@@ -1,0 +1,5 @@
+# This file will be read by resetprop
+# Example: Change dpi
+# ro.sf.lcd_density=320
+debug.gralloc.gfx_ubwc_disable=1
+vendor.gralloc.disable_ubwc=1
