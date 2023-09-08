@@ -1,7 +1,8 @@
 id=gcam_extension
 name=UltraM8's gcXtension [Experimental]
 version=v1
-versionCode=13
+versionCode=14
 author=UltraM8
 description=Experimental extra blobs port for gpu processing within google camera.
-updateJson=
+updateJson=https://github.com/ObyeBoss/UltraM8s_gcXtension/main/update.json
+support=https://t.me/ucvm_gcam

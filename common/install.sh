@@ -1,14 +1,14 @@
 L=$MODPATH/common/blob
-#PL="/system/vendor/etc/public.libraries.txt"
-PL="$(find $PARTITIONS -type f -name "public.libraries.txt")"
+PL="$(find /system/etc /vendor/etc -type f -name "public.libraries.txt")"
 V=/system/vendor/lib64
 SV=/system/lib64
 
 for OPL in ${PL}; do
 PL="$MODPATH$(echo $OPL | sed "s|^/vendor|/system/vendor|g")"
-$KSU && PL="$(echo $PL | sed -e "s|^/odm|/system/odm|g" -e "s|^/my_product|/system/my_product|g")"
+$KSU && PL="$(echo $PL | sed -e "s|$MODPATH/odm|$MODPATH/system/odm|g" -e "s|$MODPATH/my_product|$MODPATH/system/my_product|g")"
 cp_ch $ORIGDIR$OPL $PL
 sed -i 's/\t/  /g' $PL
+
 if [ -f "$V/lib_aion_buffer.so" ]; then
  cp_ch $L/lib_aion_buffer.so $MODPATH$V/lib_aion_buffer.so
  echo "lib_aion_buffer.so" >> $PL
